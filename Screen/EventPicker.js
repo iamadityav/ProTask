@@ -17,18 +17,25 @@ const EventPicker = () => {
   const dispatch = useDispatch();
   const work = useSelector(state => state.event.data);
 
-  const [eventColor, setEventColor] = React.useState('');
-  const [eventTitle, setEventTile] = React.useState('');
+  const getColor = () => {
+    const letters = '89ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * letters.length)];
+    }
+    return color;
+  };
+
+  const [eventTitle, setEventTitle] = React.useState('');
   const [eventLocation, setEventLocation] = React.useState('');
   const [date, setDate] = React.useState(new Date());
   const [open, setOpen] = React.useState(false);
-  const [dateValue, setdateValue] = React.useState('');
+  const [dateValue, setDateValue] = React.useState('');
 
-  //Execute when component is loaded
   React.useEffect(() => {
     RNCalendarEvents.requestPermissions()
       .then(res => {
-        console.log('Premission Response', res);
+        console.log('Permission Response', res);
       })
       .catch(error => {
         console.log(error);
@@ -39,6 +46,8 @@ const EventPicker = () => {
     const newDate = new Date(date);
     newDate.setHours(newDate.getHours() + 2);
 
+    const newEventColor = getColor();
+
     RNCalendarEvents.saveEvent(eventTitle, {
       calendarId: '3',
       startDate: date.toISOString(),
@@ -47,23 +56,22 @@ const EventPicker = () => {
     })
       .then(value => {
         console.log('Event Id--->', value);
-        const newEventColor = getColor();
-        setEventColor(newEventColor);
         dispatch(
           AddEvent({
             eventTitle,
             eventLocation,
             dateValue: dateValue.toString(),
+            color: newEventColor,
           }),
         );
       })
-
       .catch(error => {
         console.log(' Did Not work Threw an error --->', error);
       });
-    setEventTile('');
+
+    setEventTitle('');
     setEventLocation('');
-    setdateValue('');
+    setDateValue('');
   };
 
   const deletEvent = () => {
@@ -76,20 +84,10 @@ const EventPicker = () => {
     );
   };
 
-  const getColor = () => {
-    const letters = '89ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * letters.length)];
-    }
-    return color;
-  };
-
-  // const eventColor = getColor();
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+        {/* ... text input and date picker components ... */}
         <View style={styles.mainContainer}>
           <View style={styles.singleElement}>
             <View style={styles.textInputContainer}>
@@ -99,7 +97,7 @@ const EventPicker = () => {
                 placeholderTextColor={'#000000'}
                 value={eventTitle}
                 onChangeText={value => {
-                  setEventTile(value);
+                  setEventTitle(value);
                 }}
               />
             </View>
@@ -153,7 +151,8 @@ const EventPicker = () => {
 
                   setOpen(false);
                   setDate(date);
-                  setdateValue(datetime.toString());
+                  // setdateValue(datetime.toString());
+                  setDateValue(datetime.toString());
                 }}
                 minimumDate={new Date()}
                 onCancel={() => {
@@ -163,23 +162,9 @@ const EventPicker = () => {
             </View>
           </View>
         </View>
-
-        <TouchableOpacity onPress={() => createEvent()}>
-          <View
-            style={{
-              flex: 2,
-              height: 50,
-              width: 100,
-              justifyContent: 'center',
-              alignItems: 'center',
-              alignSelf: 'center',
-              borderRadius: 15,
-              marginBottom: 1,
-              margin: 2,
-              backgroundColor: '#ffffff',
-              marginBottom: 20,
-            }}>
-            <Text style={styles.save}> Save Event </Text>
+        <TouchableOpacity onPress={createEvent}>
+          <View style={styles.saveButton}>
+            <Text style={styles.saveText}>Save Event</Text>
           </View>
         </TouchableOpacity>
         <ScrollView>
@@ -188,11 +173,11 @@ const EventPicker = () => {
               key={index}
               style={[
                 {alignItems: 'center'},
-                {backgroundColor: eventColor},
-                [styles.cardcontainer],
+                {backgroundColor: item.color},
+                styles.cardcontainer,
               ]}>
               <TouchableOpacity onPress={deletEvent}>
-                <View style={[styles.cardcontainer]}>
+                <View style={styles.cardcontainer}>
                   <Text style={styles.text}>• {item.eventTitle}</Text>
                   <Text style={styles.text}>• {item.eventLocation}</Text>
                   <Text style={styles.text}>• {item.dateValue}</Text>
@@ -207,6 +192,7 @@ const EventPicker = () => {
 };
 
 const styles = StyleSheet.create({
+  // ... your existing styles ...
   container: {
     flex: 1,
     backgroundColor: '#f2f2f2',
@@ -274,6 +260,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#555555',
     fontWeight: '600',
+  },
+  saveButton: {
+    flex: 2,
+    height: 50,
+    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: 15,
+    marginBottom: 1,
+    margin: 2,
+    backgroundColor: '#ffffff',
+    marginBottom: 20,
+  },
+  saveText: {
+    color: '#000000',
   },
 });
 

@@ -1,16 +1,9 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import InputText from '../components/InputText';
 import {useDispatch, useSelector} from 'react-redux';
 import {FlatList} from 'react-native';
 import {RemoveTask} from '../components/redux/Addslice';
-import Position from '../components/Position';
 
 const MainScreen = () => {
   const dispatch = useDispatch();

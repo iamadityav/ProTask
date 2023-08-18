@@ -6,10 +6,14 @@ export const EventSlice = createSlice({
   },
   reducers: {
     AddEvent(state, action) {
-      state.data.push(action.payload);
+      // state.data.push(action.payload);
+      const {eventTitle, eventLocation, dateValue, color} = action.payload;
+      state.data.push({eventTitle, eventLocation, dateValue, color});
     },
     RemoveEvent: (state, action) => {
-      state.data.pop(action.payload);
+      // state.data.pop(action.payload);
+      const {eventTitle, eventLocation, dateValue, color} = action.payload;
+      state.data.pop({eventTitle, eventLocation, dateValue, color});
     },
   },
 });
