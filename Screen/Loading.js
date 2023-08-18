@@ -13,7 +13,7 @@ const Loading = ({navigation}) => {
       <TouchableOpacity
         onPress={() => navigation.navigate('MainScreen')}
         style={styles.button}>
-        <Text style={styles.text}>Click Me !</Text>
+        <Text style={styles.text}>PROTASK</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -37,5 +37,6 @@ const styles = StyleSheet.create({
   text: {
     color: '#f2f2f2',
     fontSize: 18,
+    fontFamily: 'Arial',
   },
 });
