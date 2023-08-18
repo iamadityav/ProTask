@@ -1,19 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
 
 export const Addslice = createSlice({
-    name: "add",
-    initialState: {
-        data:[],
+  name: 'add',
+  initialState: {
+    data: [],
+  },
+  reducers: {
+    AddTask: (state, action) => {
+      state.data.push(action.payload);
     },
-    reducers: {
-        AddTask : (state, action)=> {
-            state.data.push(action.payload);
-        },
-        RemoveTask: (state, action) => {
-            state.data.pop(action.payload);
-        }
-    }
-})
+    RemoveTask: (state, action) => {
+      state.data.pop(action.payload);
+    },
+    // AddEvent: (state, action) => {
+    //   state.data.push(action.payload);
+    // },
+  },
+});
 
-export const { AddTask,RemoveTask } = Addslice.actions;
+export const {AddTask, RemoveTask} = Addslice.actions;
 export default Addslice.reducer;
