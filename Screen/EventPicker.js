@@ -87,7 +87,6 @@ const EventPicker = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {/* ... text input and date picker components ... */}
         <View style={styles.mainContainer}>
           <View style={styles.singleElement}>
             <View style={styles.textInputContainer}>
@@ -192,7 +191,6 @@ const EventPicker = () => {
 };
 
 const styles = StyleSheet.create({
-  // ... your existing styles ...
   container: {
     flex: 1,
     backgroundColor: '#f2f2f2',

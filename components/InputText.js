@@ -33,7 +33,7 @@ const InputText = () => {
         <TextInput
           placeholder="Task.."
           value={list}
-          placeholderTextColor="rgba(20, 148, 20, 0.3)"
+          placeholderTextColor="rgba(0,0,0, 0.3)"
           blurOnSubmit
           style={style.input}
           onChangeText={onChangeTextHandler}
@@ -57,7 +57,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   inputContainer: {
-    backgroundColor: '#61677A',
+    backgroundColor: '#ffffff',
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: 50,
@@ -72,7 +72,7 @@ const style = StyleSheet.create({
   },
   input: {
     paddingTop: 2,
-    color: '#00C9C8',
+    color: '#000000',
     paddingHorizontal: 10,
     borderRadius: 5,
     fontSize: 20,
@@ -80,7 +80,7 @@ const style = StyleSheet.create({
     top: 4,
   },
   touch: {
-    backgroundColor: '#61677A',
+    backgroundColor: '#ffffff',
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: 150,
