@@ -11,17 +11,17 @@ const DrawerNavigation = () => {
   return (
     <Drawer.Navigator initialRouteName="Loading">
       <Drawer.Screen
-        name="Loading"
+        name="Home"
         component={Loading}
         options={{headerShown: false}}
       />
       <Drawer.Screen
-        name="MainScreen"
+        name="Today"
         component={MainScreen}
         options={{headerShown: false}}
       />
       <Drawer.Screen
-        name="DetailScreen"
+        name="Wall"
         component={DetailScreen}
         options={{headerShown: false}}
       />

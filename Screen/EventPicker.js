@@ -92,8 +92,8 @@ const EventPicker = () => {
             <View style={styles.textInputContainer}>
               <TextInput
                 style={styles.textInput}
-                placeholder="Enter Event Title"
-                placeholderTextColor={'#000000'}
+                placeholder="Event"
+                placeholderTextColor="rgba(0,0,0, 0.3)"
                 value={eventTitle}
                 onChangeText={value => {
                   setEventTitle(value);
@@ -108,8 +108,8 @@ const EventPicker = () => {
             <View style={styles.textInputContainer}>
               <TextInput
                 style={styles.textInput}
-                placeholder="Enter Event Location"
-                placeholderTextColor={'#000000'}
+                placeholder="Location"
+                placeholderTextColor="rgba(0,0,0, 0.3)"
                 value={eventLocation}
                 onChangeText={value => {
                   setEventLocation(value);
@@ -163,7 +163,7 @@ const EventPicker = () => {
         </View>
         <TouchableOpacity onPress={createEvent}>
           <View style={styles.saveButton}>
-            <Text style={styles.saveText}>Save Event</Text>
+            <Text style={styles.saveText}>Save</Text>
           </View>
         </TouchableOpacity>
         <ScrollView>
@@ -194,7 +194,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f2f2f2',
-    marginTop: 50,
   },
   mainContainer: {
     display: 'flex',
@@ -234,7 +233,7 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   Datetime: {
-    color: '#000000',
+    color: 'rgba(0,0,0, 0.3)',
   },
   save: {
     color: '#000000',
@@ -274,6 +273,7 @@ const styles = StyleSheet.create({
   },
   saveText: {
     color: '#000000',
+    fontWeight: 'bold',
   },
 });
 

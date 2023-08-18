@@ -11,7 +11,7 @@ const Loading = ({navigation}) => {
   return (
     <SafeAreaView style={styles.root}>
       <TouchableOpacity
-        onPress={() => navigation.navigate('MainScreen')}
+        onPress={() => navigation.navigate('Today')}
         style={styles.button}>
         <Text style={styles.text}>PROTASK</Text>
       </TouchableOpacity>
@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
     color: '#f2f2f2',
     fontSize: 18,
     fontFamily: 'Arial',
+    fontWeight: '500',
   },
 });

@@ -36,9 +36,10 @@ const MainScreen = () => {
     dispatch(RemoveTask(list));
     setList('');
   };
+
   const getRandom = () => {
-    const maxX = 100;
-    const maxY = 100;
+    const maxX = 90;
+    const maxY = 50;
     const randomX = Math.random() * maxX;
     const randomY = Math.random() * maxY;
     return {left: randomX, top: randomY};
@@ -123,16 +124,17 @@ const styles = StyleSheet.create({
     height: 5,
   },
   textcontainer: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
-    borderColor: '#fffff',
-    borderTopEndRadius: 10,
-    borderBottomRightRadius: 10,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+    // paddingHorizontal: 20,
+    // paddingVertical: 10,
+    // borderRadius: 8,
+    // borderColor: '#fffff',
+    // borderTopEndRadius: 10,
+    // borderBottomRightRadius: 10,
+    // borderTopLeftRadius: 10,
+    // borderBottomLeftRadius: 10,
     marginTop: 5,
     marginBottom: 5,
+    alignSelf: 'auto',
   },
   vertical: {
     width: 1.2,
@@ -153,8 +155,15 @@ const styles = StyleSheet.create({
   touch: {
     backgroundColor: '#f2f2f2',
     width: '70%',
-    height: '50%',
+    height: '75%',
     top: 230,
     position: 'absolute',
+    marginTop: 10,
+    borderTopEndRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderWidth: 0.3,
+    borderColor: '#ffffff',
   },
 });
