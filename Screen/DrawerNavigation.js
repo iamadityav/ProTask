@@ -13,22 +13,40 @@ const DrawerNavigation = () => {
       <Drawer.Screen
         name="Home"
         component={Loading}
-        options={{headerShown: false}}
+        options={{
+          headerTransparent: true,
+          headerTitle: '',
+          headerTintColor: '#696969',
+        }}
       />
       <Drawer.Screen
         name="Today"
         component={MainScreen}
-        options={{headerShown: false}}
+        options={{
+          headerTransparent: true,
+          headerTitle: '',
+          headerTintColor: '#000000',
+        }}
       />
       <Drawer.Screen
         name="Wall"
         component={DetailScreen}
-        options={{headerShown: false}}
+        // options={{headerShown: false}}
+        options={{
+          headerTransparent: true,
+          headerTitle: '',
+          headerTintColor: '#000000',
+        }}
       />
       <Drawer.Screen
         name="About Us"
         component={AboutUs}
-        options={{headerShown: false}}
+        // options={{headerShown: false}}
+        options={{
+          headerTransparent: true,
+          headerTitle: '',
+          headerTintColor: '#000000',
+        }}
       />
     </Drawer.Navigator>
   );
