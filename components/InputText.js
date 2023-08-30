@@ -31,7 +31,7 @@ const InputText = () => {
     <View style={style.container}>
       <View style={style.inputContainer}>
         <TextInput
-          placeholder="Task.."
+          placeholder="Todo..."
           value={list}
           placeholderTextColor="rgba(0,0,0, 0.3)"
           blurOnSubmit

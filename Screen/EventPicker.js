@@ -194,6 +194,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f2f2f2',
+    marginTop: 40,
   },
   mainContainer: {
     display: 'flex',
@@ -234,6 +235,9 @@ const styles = StyleSheet.create({
   },
   Datetime: {
     color: 'rgba(0,0,0, 0.3)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
   },
   save: {
     color: '#000000',
