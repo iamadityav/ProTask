@@ -13,19 +13,13 @@ const InputText = () => {
   const dispatch = useDispatch();
   const task = useSelector(state => state.add);
 
-  const [list, setList] = useState(task.data);
+  const [list, setList] = useState('');
 
   const onChangeTextHandler = txt => {
     setList(txt);
     console.log('inputtext', list);
   };
 
-  const onPressHandler = item => {
-    if (list !== '') {
-      dispatch(AddTask(list));
-      setList('');
-    }
-  };
 
   return (
     <View style={style.container}>
@@ -39,11 +33,11 @@ const InputText = () => {
           onChangeText={onChangeTextHandler}
         />
       </View>
-      <TouchableOpacity style={style.touch} onPress={onPressHandler}>
+      {/* <TouchableOpacity style={style.touch} onPress={onPressHandler}>
         <View style={style.button}>
           <Text style={style.addme}>Add me</Text>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -52,50 +46,50 @@ export default InputText;
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   inputContainer: {
     backgroundColor: '#ffffff',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    width: 300,
+    height: 40,
+    borderTopEndRadius: 10,
+    borderBottomRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
     marginTop: 50,
-    width: '75%',
-    height: '5%',
-    top: 50,
-    position: 'absolute',
-    borderTopEndRadius: 10,
-    borderBottomRightRadius: 10,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
-  input: {
-    paddingTop: 2,
-    color: '#000000',
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    fontSize: 20,
-    fontWeight: '400',
-    top: 4,
-  },
-  touch: {
-    backgroundColor: '#ffffff',
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 150,
-    width: '20%',
-    height: 30,
-    top: 5,
-    position: 'absolute',
-    borderTopEndRadius: 10,
-    borderBottomRightRadius: 10,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
+    justifyContent: 'center',
   },
-  addme: {
-    color: '#000000',
-    fontSize: 18,
-    top: 3,
-  },
+  // inputContainer: {
+  //   justifyContent: 'flex-start',
+  //   alignItems: 'center',
+  //   top: 50,
+  //   position: 'absolute',
+  //   borderTopEndRadius: 10,
+  //   borderBottomRightRadius: 10,
+  //   borderTopLeftRadius: 10,
+  //   borderBottomLeftRadius: 10,
+  // },
+  // input: {
+  //   paddingTop: 2,
+  //   color: '#000000',
+  //   paddingHorizontal: 10,
+  //   borderRadius: 5,
+  //   fontSize: 20,
+  //   fontWeight: '400',
+  //   top: 4,
+  // },
+  // touch: {
+  //   backgroundColor: '#ffffff',
+  //   justifyContent: 'flex-start',
+  //   alignItems: 'center',
+  //   width: '20%',
+  //   height: 30,
+  //   top: 5,
+  // },
+  // addme: {
+  //   color: '#000000',
+  //   fontSize: 18,
+  //   top: 3,
+  // },
 });

@@ -1,18 +1,23 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import React, {useState} from 'react';
 import InputText from '../components/InputText';
 import {useDispatch, useSelector} from 'react-redux';
 import {RemoveTask} from '../components/redux/Addslice';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {AddTask} from '../components/redux/Addslice';
 
 const MainScreen = () => {
   const dispatch = useDispatch();
   const taskData = useSelector(state => state.add.data);
-  const taskDataa = useSelector(state => state.remove.data);
-  const [list, setList] = useState(taskDataa.data);
-
-  console.log('MainScreen', taskData);
+  const [list, setList] = useState([]);
 
   const getColor = () => {
     const letters = '0123456789ABCDEF';
@@ -31,9 +36,15 @@ const MainScreen = () => {
     const color = `#${blackShade}${blackShade}${blackShade}`;
     return color;
   };
+  const onPressaddMeHandler = item => {
+    if (item !== '') {
+      dispatch(AddTask(item));
+      setList(item);
+    }
+  };
 
-  const onPressHandler = () => {
-    dispatch(RemoveTask(list));
+  const onPressHandler = item => {
+    dispatch(RemoveTask(item));
     setList('');
   };
 
@@ -47,67 +58,76 @@ const MainScreen = () => {
 
   return (
     <SafeAreaView style={styles.root}>
+      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headetText}>Today</Text>
       </View>
-      <InputText />
+      {/* INPUT TEXT */}
+      <View>
+        <InputText />
+      </View>
+      {/* ADDMEBUTTON */}
+      <TouchableOpacity onPress={onPressaddMeHandler}>
+        <View style={styles.addmeContainer}>
+          <Text style={styles.addme}>Add me</Text>
+        </View>
+      </TouchableOpacity>
+      {/* LINES */}
       <View style={styles.vertical} />
       <View style={styles.horizontal} />
-      <ScrollView style={styles.touch}>
-        {taskData.map((item, index) => (
-          <TouchableOpacity key={index} onPress={onPressHandler}>
-            <View activeOpacity={getColor()} style={styles.textcontainer}>
-              <Text
-                style={[
-                  styles.todotext,
-                  {left: getRandom().left, top: getRandom().top},
-                  {color: getRandomColor({item})},
-                ]}>
-                • {item}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+      {/* TASK BOX */}
+      <View style={styles.touch}>
+        <ScrollView>
+          {taskData.map((item, index) => (
+            <TouchableOpacity key={index} onPress={onPressHandler}>
+              <View style={styles.textcontainer}>
+                <Text
+                  style={[
+                    styles.todotext,
+                    {left: getRandom().left, right: getRandom().top},
+                    {color: getColor(item)},
+                  ]}>
+                  • {item}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
 
 export default MainScreen;
+const {height} = Dimensions.get('window').height;
+const {width} = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#f2f2f2',
+    height: height,
+    width: width,
   },
-  todotext: {
-    fontSize: 20,
-    fontFamily: 'Noteworthy',
-    fontWeight: '500',
-    height: 30,
-    top: 5,
-  },
-  button: {
-    backgroundColor: 'black',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-  },
-  text: {
-    color: '#00C9C8',
-    fontSize: 18,
-  },
+  // todotext: {
+  //   fontSize: 20,
+  //   fontFamily: 'Noteworthy',
+  //   fontWeight: '500',
+  // },
+  // button: {
+  //   backgroundColor: 'black',
+  //   paddingVertical: 10,
+  //   paddingHorizontal: 20,
+  //   borderRadius: 8,
+  // },
+  // text: {
+  //   color: '#00C9C8',
+  //   fontSize: 18,
+  // },
   header: {
-    //marginTop: 45,
-    height: 70,
     width: '100%',
     backgroundColor: '#f2f2f2',
-    position: 'absolute',
-    justifyContent: 'center',
     alignItems: 'center',
-    top: 0,
   },
   headetText: {
     color: '#000000',
@@ -118,24 +138,11 @@ const styles = StyleSheet.create({
     textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 7,
   },
-  line: {
-    backgroundColor: '#000000f',
-    width: '40%',
-    height: 5,
-  },
-  textcontainer: {
-    // paddingHorizontal: 20,
-    // paddingVertical: 10,
-    // borderRadius: 8,
-    // borderColor: '#fffff',
-    // borderTopEndRadius: 10,
-    // borderBottomRightRadius: 10,
-    // borderTopLeftRadius: 10,
-    // borderBottomLeftRadius: 10,
-    marginTop: 5,
-    marginBottom: 5,
-    alignSelf: 'auto',
-  },
+  // line: {
+  //   backgroundColor: '#000000f',
+  //   width: '40%',
+  //   height: 5,
+  // },
   vertical: {
     width: 1.2,
     position: 'absolute',
@@ -154,16 +161,57 @@ const styles = StyleSheet.create({
   },
   touch: {
     backgroundColor: '#f2f2f2',
-    width: '70%',
-    height: '75%',
-    top: 230,
-    position: 'absolute',
-    marginTop: 10,
+    width: '75%',
+    height: '80%',
     borderTopEndRadius: 10,
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
-    borderWidth: 0.3,
+    borderWidth: 0.5,
     borderColor: '#ffffff',
+    marginTop: 25,
+    alignSelf: 'center',
+  },
+  // todoContainer: {
+  //   height: '72%',
+  //   width: '75%',
+  //   marginTop: 20,
+  //   borderTopEndRadius: 10,
+  //   borderBottomRightRadius: 10,
+  //   borderTopLeftRadius: 10,
+  //   borderBottomLeftRadius: 10,
+  //   borderColor: '#ffffff',
+  // },
+  addmeContainer: {
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    width: '20%',
+    height: 30,
+    alignSelf: 'center',
+    marginTop: 10,
+    borderTopEndRadius: 2,
+    borderBottomRightRadius: 2,
+    borderTopLeftRadius: 2,
+    borderBottomLeftRadius: 2,
+  },
+  addme: {
+    color: '#000000',
+    fontSize: 18,
+    top: 3,
   },
 });
+
+const renderItem = ({item, index}) => (
+  <TouchableOpacity onPress={() => onPressHandler(item, index)}>
+    <View activeOpacity={getColor()} style={styles.textcontainer}>
+      <Text
+        style={[
+          styles.todotext,
+          {left: getRandom().left, right: getRandom().top},
+          {color: getColor({item})},
+        ]}>
+        • {item}
+      </Text>
+    </View>
+  </TouchableOpacity>
+);

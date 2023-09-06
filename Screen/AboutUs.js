@@ -27,6 +27,9 @@ const AboutUs = () => {
 
 export default AboutUs;
 
+const {height} = Dimensions.get('window').height;
+const {width} = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',

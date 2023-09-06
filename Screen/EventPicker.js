@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import RNCalendarEvents from 'react-native-calendar-events';
 import DatePicker from 'react-native-date-picker';
@@ -189,6 +190,8 @@ const EventPicker = () => {
     </SafeAreaView>
   );
 };
+const {height} = Dimensions.get('window').height;
+const {width} = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {

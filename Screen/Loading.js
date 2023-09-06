@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  Dimensions,
 } from 'react-native';
 import {React, useState, useEffect} from 'react';
 
@@ -21,39 +22,47 @@ const Loading = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.root}>
-      <Text style={styles.date}>
-        {new Date().toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        })}
-        {/* {time} */}
-      </Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Today')}
-        style={styles.button}>
-        <Text style={styles.text}>PROTASK</Text>
-      </TouchableOpacity>
+      <View style={{marginTop: '5%'}}>
+        {/* TIME */}
+        <Text style={styles.date}>
+          {new Date().toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+          })}
+        </Text>
+      </View>
+      {/* TITLE */}
+      <View style={styles.titleContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Today')}
+          style={styles.button}>
+          <Text style={styles.text}>PROTASK</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
 
 export default Loading;
 
+const {height} = Dimensions.get('window').height;
+const {width} = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000000',
+    height: height,
+    width: width,
+    flexDirection: 'column',
+    //justifyContent: 'space-between',
   },
   date: {
     fontSize: 10,
-    textAlign: 'center',
-    position: 'absolute',
-    top: 50,
-    color: '#696969',
+    color: '#7e7e7e',
   },
   button: {
     backgroundColor: '#000000',
@@ -66,5 +75,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Arial',
     fontWeight: '500',
+  },
+  titleContainer: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });

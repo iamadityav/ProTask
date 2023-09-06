@@ -12,9 +12,6 @@ export const Addslice = createSlice({
     RemoveTask: (state, action) => {
       state.data.pop(action.payload);
     },
-    // AddEvent: (state, action) => {
-    //   state.data.push(action.payload);
-    // },
   },
 });
 
